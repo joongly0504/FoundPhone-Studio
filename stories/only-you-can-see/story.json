@@ -1,0 +1,417 @@
+{
+  "scriptVersion": 1,
+  "id": "only-you-can-see",
+  "title": "仅你可见",
+  "description": "完全虚构的互动手机故事：两位虚构演员在《入戏》拍摄相识、因工作同住后，于收工夜晚展开的一段微信剧情。本作品不基于、也不宣称任何现实私人关系或真实聊天记录。",
+  "revision": 1,
+  "phone": {
+    "owner": "刘天跃（奥利）",
+    "date": "2026-10-27",
+    "time": "21:18",
+    "battery": 62,
+    "network": "5G",
+    "wallpaper": "sage"
+  },
+  "installedApps": [
+    "wechat",
+    "phone",
+    "contacts",
+    "notes",
+    "calendar",
+    "photos",
+    "camera",
+    "settings"
+  ],
+  "contacts": [
+    {
+      "id": "li-shuyuan",
+      "name": "李淑元（元元大王）",
+      "phone": "",
+      "bio": "虚构角色 · 《入戏》演员 · 奥利的同居恋人"
+    },
+    {
+      "id": "cheng-director",
+      "name": "程导",
+      "phone": "",
+      "bio": "虚构角色 · 《入戏》导演"
+    },
+    {
+      "id": "xu-producer",
+      "name": "许制片",
+      "phone": "",
+      "bio": "虚构角色 · 《入戏》制片人"
+    },
+    {
+      "id": "a-cen",
+      "name": "阿岑",
+      "phone": "",
+      "bio": "虚构角色 · 两人的朋友"
+    },
+    {
+      "id": "makeup-xiaoyu",
+      "name": "小雨",
+      "phone": "",
+      "bio": "虚构角色 · 《入戏》化妆师"
+    }
+  ],
+  "chats": [
+    {
+      "id": "chat-yuanyuan",
+      "app": "wechat",
+      "title": "元元大王",
+      "participants": ["owner", "li-shuyuan"],
+      "messages": [
+        {
+          "id": "wx-yuanyuan-01",
+          "body": "奥利，到棚里了吗？保温杯在你包侧袋，别又忘了喝水。",
+          "senderId": "li-shuyuan",
+          "time": "2026-10-27 08:06"
+        },
+        {
+          "id": "wx-yuanyuan-02",
+          "body": "报告元元大王：已到！保温杯、剧本、你的薄外套，三件套全部守护成功。",
+          "senderId": "owner",
+          "time": "2026-10-27 08:08"
+        },
+        {
+          "id": "wx-yuanyuan-03",
+          "body": "外套不用守护，给你穿。今天降温。",
+          "senderId": "li-shuyuan",
+          "time": "2026-10-27 08:09"
+        },
+        {
+          "id": "wx-yuanyuan-04",
+          "body": "收到。元元大王的每一句话都按最高优先级执行。",
+          "senderId": "owner",
+          "time": "2026-10-27 08:10"
+        },
+        {
+          "id": "wx-yuanyuan-05",
+          "body": "少贫。下午那场情绪戏，按自己的节奏来。你安静一会儿也没关系。",
+          "senderId": "li-shuyuan",
+          "time": "2026-10-27 13:27"
+        },
+        {
+          "id": "wx-yuanyuan-06",
+          "body": "你怎么知道我刚躲到监视器后面复盘台词了？我本来想把这段想明白，再去找你。",
+          "senderId": "owner",
+          "time": "2026-10-27 13:29"
+        },
+        {
+          "id": "wx-yuanyuan-07",
+          "body": "因为你想事情时会转戒指。看见了。",
+          "senderId": "li-shuyuan",
+          "time": "2026-10-27 13:30"
+        },
+        {
+          "id": "wx-yuanyuan-08",
+          "body": "被元元大王观察到了。那我去找你，借两分钟充电。",
+          "senderId": "owner",
+          "time": "2026-10-27 13:31"
+        },
+        {
+          "id": "wx-yuanyuan-09",
+          "body": "休息区。给你留了不加冰的气泡水。",
+          "senderId": "li-shuyuan",
+          "time": "2026-10-27 13:32"
+        },
+        {
+          "id": "wx-yuanyuan-10",
+          "body": "奥利，收工后先看备忘录里的《回家路线》。别直接冲出去，外面还在下雨。",
+          "senderId": "li-shuyuan",
+          "time": "2026-10-27 21:16"
+        }
+      ]
+    },
+    {
+      "id": "chat-wrap-group",
+      "app": "wechat",
+      "title": "《入戏》通告群（5）",
+      "participants": ["owner", "li-shuyuan", "cheng-director", "xu-producer", "makeup-xiaoyu"],
+      "messages": [
+        {
+          "id": "wx-group-01",
+          "body": "明天第一场改到 09:30，雨戏保留。各部门今晚注意保暖。",
+          "senderId": "xu-producer",
+          "time": "2026-10-27 18:40"
+        },
+        {
+          "id": "wx-group-02",
+          "body": "收到。两位主演今天的对手戏很好，回去少看几遍回放，早点休息。",
+          "senderId": "cheng-director",
+          "time": "2026-10-27 18:42"
+        },
+        {
+          "id": "wx-group-03",
+          "body": "收到，妆发包已整理好。奥利的围巾在服装车，别落下。",
+          "senderId": "makeup-xiaoyu",
+          "time": "2026-10-27 18:43"
+        },
+        {
+          "id": "wx-group-04",
+          "body": "谢谢小雨！围巾已经被元元大王列进我的今日必带清单。",
+          "senderId": "owner",
+          "time": "2026-10-27 18:44"
+        },
+        {
+          "id": "wx-group-05",
+          "body": "少说两句，先把夜戏拍完。",
+          "senderId": "li-shuyuan",
+          "time": "2026-10-27 18:45"
+        }
+      ]
+    },
+    {
+      "id": "chat-late-snack",
+      "app": "wechat",
+      "title": "夜宵搭子（3）",
+      "participants": ["owner", "li-shuyuan", "a-cen"],
+      "messages": [
+        {
+          "id": "wx-friend-01",
+          "body": "我押十分钟内，奥利会问：元元大王想吃什么？",
+          "senderId": "a-cen",
+          "time": "2026-10-27 20:52"
+        },
+        {
+          "id": "wx-friend-02",
+          "body": "不止十分钟，我已经在问了。元元大王，粥、面还是那家好看的小蛋糕？",
+          "senderId": "owner",
+          "time": "2026-10-27 20:53"
+        },
+        {
+          "id": "wx-friend-03",
+          "body": "蛋糕。你吃粥。别空腹喝咖啡。",
+          "senderId": "li-shuyuan",
+          "time": "2026-10-27 20:54"
+        },
+        {
+          "id": "wx-friend-04",
+          "body": "好的，我明白了：这是全世界最具体的关心。",
+          "senderId": "owner",
+          "time": "2026-10-27 20:55"
+        },
+        {
+          "id": "wx-friend-05",
+          "body": "我先撤退，祝二位收工顺利。",
+          "senderId": "a-cen",
+          "time": "2026-10-27 20:56"
+        }
+      ]
+    }
+  ],
+  "content": {
+    "notes": [
+      {
+        "id": "note-home-route",
+        "title": "回家路线",
+        "body": "停车场 B 口等我。车里有干毛巾和热饮。\n\n今天你话很多，我知道是紧张；可你一个人安静下来时，也别把所有事都自己想完。回家路上慢慢说。\n\n——元元大王",
+        "kind": "note",
+        "folder": "备忘录",
+        "time": "2026-10-27 21:12",
+        "sender": "李淑元（元元大王）"
+      },
+      {
+        "id": "note-only-you",
+        "title": "仅你可见",
+        "body": "密码提示：我们今天共同的最后一句台词里，那个“回去”的英文。\n\n奥利：我不太会把话说得很好听。但你每次收工回家，我都想先把热的、好看的、你会喜欢的东西放在你面前。\n\n明天也一起把戏拍好。",
+        "kind": "note",
+        "folder": "备忘录",
+        "hidden": true,
+        "password": "home",
+        "time": "2026-10-27 21:14",
+        "sender": "李淑元（元元大王）"
+      }
+    ],
+    "calendar": [
+      {
+        "id": "calendar-rain-scene",
+        "title": "《入戏》雨戏",
+        "body": "10 月 28 日 09:30 · A 棚\n对手戏：刘天跃（奥利）/ 李淑元。收工后留出回家晚餐时间。",
+        "kind": "event",
+        "time": "2026-10-28 09:30",
+        "sender": "《入戏》通告组"
+      }
+    ],
+    "photos": [
+      {
+        "id": "photo-umbrella-list",
+        "title": "雨伞与两杯热饮",
+        "body": "一张虚构的工作花絮文字记录：棚外的雨伞、车里的两杯热饮，以及写着“奥利记得带围巾”的便签。",
+        "kind": "image",
+        "folder": "最近项目",
+        "time": "2026-10-27 21:15",
+        "sender": "刘天跃（奥利）"
+      }
+    ],
+    "phone": [
+      {
+        "id": "call-yuanyuan",
+        "title": "李淑元（元元大王）",
+        "body": "作品内模拟来电 · 收工后接人回家",
+        "kind": "call",
+        "time": "2026-10-27 21:19",
+        "sender": "李淑元（元元大王）"
+      }
+    ]
+  },
+  "variables": {
+    "fictional": true,
+    "homeReady": false
+  },
+  "events": [
+    {
+      "id": "start-night",
+      "label": "收工夜晚开始",
+      "type": "start",
+      "actions": [
+        {
+          "type": "notification",
+          "key": "",
+          "value": "微信：元元大王发来一条消息"
+        }
+      ]
+    },
+    {
+      "id": "read-home-route",
+      "label": "读到回家路线",
+      "event": "read",
+      "target": "note-home-route",
+      "actions": [
+        {
+          "type": "unlock",
+          "key": "note-only-you",
+          "value": true
+        },
+        {
+          "type": "notification",
+          "key": "",
+          "value": "备忘录：一条“仅你可见”已解锁"
+        }
+      ]
+    },
+    {
+      "id": "read-only-you",
+      "label": "读到仅你可见",
+      "event": "read",
+      "target": "note-only-you",
+      "actions": [
+        {
+          "type": "variable",
+          "key": "homeReady",
+          "value": true
+        }
+      ],
+      "next": ["yuanyuan-calls"]
+    },
+    {
+      "id": "yuanyuan-calls",
+      "label": "元元大王来电",
+      "type": "delay",
+      "delayMs": 1000,
+      "actions": [
+        {
+          "type": "time",
+          "key": "",
+          "value": "21:20"
+        },
+        {
+          "type": "call",
+          "key": "call-yuanyuan",
+          "value": "李淑元（元元大王）"
+        }
+      ]
+    },
+    {
+      "id": "answer-yuanyuan",
+      "label": "接起元元大王的电话",
+      "event": "callAnswered",
+      "target": "call-yuanyuan",
+      "next": ["home-choice"]
+    },
+    {
+      "id": "home-choice",
+      "label": "收工后的选择",
+      "type": "choice",
+      "next": ["go-to-b-carpark", "take-a-quiet-walk"]
+    },
+    {
+      "id": "go-to-b-carpark",
+      "label": "去 B 口会合",
+      "type": "ending",
+      "actions": [
+        {
+          "type": "ending",
+          "key": "",
+          "value": "回家：奥利带着围巾和热饮，在 B 口见到元元大王。"
+        }
+      ]
+    },
+    {
+      "id": "take-a-quiet-walk",
+      "label": "先安静走一小段",
+      "type": "ending",
+      "actions": [
+        {
+          "type": "ending",
+          "key": "",
+          "value": "慢一点：奥利先整理好心绪，再和元元大王一起回家。"
+        }
+      ]
+    }
+  ],
+  "tests": [
+    {
+      "name": "meet-at-b-carpark",
+      "steps": [
+        {
+          "event": "read",
+          "target": "note-home-route"
+        },
+        {
+          "event": "read",
+          "target": "note-only-you",
+          "password": "home"
+        },
+        {
+          "advanceMs": 1000
+        },
+        {
+          "event": "callAnswered",
+          "target": "call-yuanyuan"
+        },
+        {
+          "choose": "go-to-b-carpark"
+        }
+      ],
+      "ending": "回家：奥利带着围巾和热饮，在 B 口见到元元大王。",
+      "expectUnlocked": ["note-only-you"]
+    },
+    {
+      "name": "quiet-walk-home",
+      "steps": [
+        {
+          "event": "read",
+          "target": "note-home-route"
+        },
+        {
+          "event": "read",
+          "target": "note-only-you",
+          "password": "home"
+        },
+        {
+          "advanceMs": 1000
+        },
+        {
+          "event": "callAnswered",
+          "target": "call-yuanyuan"
+        },
+        {
+          "choose": "take-a-quiet-walk"
+        }
+      ],
+      "ending": "慢一点：奥利先整理好心绪，再和元元大王一起回家。",
+      "expectUnlocked": ["note-only-you"]
+    }
+  ]
+}
