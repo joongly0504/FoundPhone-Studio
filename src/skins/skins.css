@@ -726,6 +726,57 @@
   color: #999;
   margin-top: 5px;
 }
+.calendar-event-form {
+  display: grid;
+  gap: 10px;
+  padding: 14px 16px 18px;
+  border-top: 1px solid #eee;
+}
+.calendar-event-form > strong {
+  font-size: 13px;
+}
+.calendar-event-form label {
+  display: grid;
+  gap: 5px;
+  color: #777;
+  font-size: 10px;
+}
+.calendar-event-form input,
+.calendar-event-form textarea {
+  width: 100%;
+  border: 1px solid #dedede;
+  border-radius: 8px;
+  padding: 8px 9px;
+  color: #333;
+  font: inherit;
+  font-size: 12px;
+}
+.calendar-event-form textarea {
+  min-height: 56px;
+  resize: vertical;
+}
+.calendar-form-datetime,
+.calendar-form-actions {
+  display: flex;
+  gap: 8px;
+}
+.calendar-form-datetime > label {
+  flex: 1;
+  min-width: 0;
+}
+.calendar-form-actions {
+  justify-content: flex-end;
+}
+.calendar-form-actions button {
+  border-radius: 8px;
+  padding: 8px 11px;
+  color: var(--app-accent, #087cff);
+  font-size: 11px;
+}
+.calendar-form-actions button[type="submit"] {
+  background: var(--app-accent, #087cff);
+  color: white;
+}
 .mail-folders {
   display: flex;
   gap: 8px;
