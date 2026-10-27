@@ -26,6 +26,7 @@ import {
   PanelRightClose,
   ShieldCheck,
   Info,
+  CalendarDays,
 } from "lucide-react";
 import { useStudio } from "./store";
 import { Phone } from "./Phone";
@@ -37,7 +38,13 @@ import {
   type Item,
   type Runtime,
 } from "./schema";
-import { ItemEditor, PhoneSettings, BatchImport, Modal } from "./Editors";
+import {
+  ItemEditor,
+  PhoneSettings,
+  BatchImport,
+  CalendarEventManager,
+  Modal,
+} from "./Editors";
 import { jsonExport, backup, staticExport, importWork, mediaData } from "./io";
 import { dispatch } from "./engine";
 import "./styles.css";
@@ -156,6 +163,7 @@ function Studio() {
           {[
             { id: "phone", icon: Smartphone, label: "手机创作" },
             { id: "story", icon: GitBranch, label: "剧情编排" },
+            { id: "calendar", icon: CalendarDays, label: "日历事件" },
             { id: "assets", icon: FolderOpen, label: "素材与内容" },
             { id: "works", icon: LayoutGrid, label: "我的作品" },
           ].map((t) => (
@@ -335,6 +343,15 @@ function Studio() {
               备份。
             </p>
           </div>
+        ) : view === "calendar" ? (
+          <CalendarEventManager
+            work={work}
+            onChange={(events) =>
+              change((next) => {
+                next.data.calendar = events;
+              })
+            }
+          />
         ) : view === "assets" ? (
           <div className="library-page">
             <div className="page-title">
