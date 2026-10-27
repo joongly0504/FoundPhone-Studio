@@ -15,7 +15,6 @@ export default defineConfig({
   timeout: 30000,
   use: {
     baseURL: "http://127.0.0.1:4173",
-    channel: "chrome",
     headless: true,
     serviceWorkers: "block",
     viewport: { width: 1440, height: 1000 },
