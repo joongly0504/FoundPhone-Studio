@@ -19,6 +19,7 @@ import {
   MapPin,
   Music,
   Phone,
+  Plus,
   Search,
   SkipForward,
   Star,
@@ -42,6 +43,81 @@ import {
   useContent,
   type Props,
 } from "./shared";
+
+type PersonalCalendarEvent = {
+  id: string;
+  title: string;
+  body: string;
+  date: string;
+  time: string;
+  location: string;
+};
+
+const personalCalendarEventsKey = "personalCalendarEvents";
+
+function readPersonalCalendarEvents(value: unknown): PersonalCalendarEvent[] {
+  if (typeof value !== "string") return [];
+  try {
+    const entries: unknown = JSON.parse(value);
+    if (!Array.isArray(entries)) return [];
+    return entries
+      .filter(
+        (entry): entry is PersonalCalendarEvent =>
+          !!entry &&
+          typeof entry === "object" &&
+          typeof entry.id === "string" &&
+          typeof entry.title === "string" &&
+          typeof entry.body === "string" &&
+          /^\d{4}-\d{2}-\d{2}$/.test(entry.date as string) &&
+          /^\d{2}:\d{2}$/.test(entry.time as string) &&
+          typeof entry.location === "string",
+      )
+      .slice(-100);
+  } catch {
+    return [];
+  }
+}
+
+function calendarStart(value?: string) {
+  const [year, month, day] = (value || "2026-09-01")
+    .split("-")
+    .map(Number);
+  if (
+    Number.isInteger(year) &&
+    Number.isInteger(month) &&
+    Number.isInteger(day) &&
+    month >= 1 &&
+    month <= 12 &&
+    day >= 1 &&
+    day <= new Date(Date.UTC(year, month, 0)).getUTCDate()
+  )
+    return { year, month: month - 1, day };
+  return { year: 2026, month: 8, day: 1 };
+}
+
+function asCalendarItem(event: PersonalCalendarEvent, owner = "我"): Item {
+  return {
+    id: event.id,
+    title: event.title,
+    body: event.body || "个人日程",
+    richText: "",
+    meta: { location: event.location || "未填写地点" },
+    time: `${event.date} ${event.time}`,
+    sender: owner,
+    avatar: "",
+    kind: "event",
+    media: "",
+    hidden: false,
+    unlock: "",
+    password: "",
+    folder: "",
+    favorite: false,
+    outgoing: false,
+    read: false,
+    likes: 0,
+    comments: [],
+  };
+}
 export function PhoneSkin(p: Props) {
   const { tab, setTab, q, setQ, items } = useContent(p, "最近通话");
   const [digits, setDigits] = useState(""),
@@ -409,34 +485,115 @@ export function NotesSkin(p: Props) {
   );
 }
 export function CalendarSkin(p: Props) {
-  const [month, setMonth] = useState(8),
-    [year, setYear] = useState(2026),
-    [day, setDay] = useState(1);
+  const start = calendarStart(p.virtualDate);
+  const [month, setMonth] = useState(start.month),
+    [year, setYear] = useState(start.year),
+    [day, setDay] = useState(start.day),
+    [adding, setAdding] = useState(false),
+    [personalEvents, setPersonalEvents] = useState<PersonalCalendarEvent[]>(
+      () => readPersonalCalendarEvents(p.ui?.[personalCalendarEventsKey]),
+    ),
+    [draft, setDraft] = useState({
+      title: "",
+      date: p.virtualDate || "2026-09-01",
+      time: "09:00",
+      location: "",
+      body: "",
+    });
+  useEffect(() => {
+    setPersonalEvents(readPersonalCalendarEvents(p.ui?.[personalCalendarEventsKey]));
+  }, [p.ui?.[personalCalendarEventsKey]]);
   const prefix = `${year}-${String(month + 1).padStart(2, "0")}`;
-  const list = p.items.filter((i) =>
-    i.time.startsWith(`${prefix}-${String(day).padStart(2, "0")}`),
-  );
+  const items = [
+    ...p.items,
+    ...personalEvents.map((event) => asCalendarItem(event, p.owner)),
+  ];
+  const list = items
+    .filter((i) =>
+      i.time.startsWith(`${prefix}-${String(day).padStart(2, "0")}`),
+    )
+    .sort((a, b) => a.time.localeCompare(b.time));
   const move = (d: number) => {
     const date = new Date(Date.UTC(year, month + d, 1));
     setYear(date.getUTCFullYear());
     setMonth(date.getUTCMonth());
     setDay(1);
   };
+  const openManualAdd = () => {
+    setDraft({
+      title: "",
+      date: `${prefix}-${String(day).padStart(2, "0")}`,
+      time: "09:00",
+      location: "",
+      body: "",
+    });
+    setAdding(true);
+  };
+  const goToToday = () => {
+    setYear(start.year);
+    setMonth(start.month);
+    setDay(start.day);
+  };
+  const addPersonalEvent = () => {
+    const title = draft.title.trim();
+    if (!title || !/^\d{4}-\d{2}-\d{2}$/.test(draft.date)) return;
+    const next = [
+      ...personalEvents,
+      {
+        id: `calendar-personal-${Date.now()}`,
+        title,
+        body: draft.body.trim(),
+        date: draft.date,
+        time: /^\d{2}:\d{2}$/.test(draft.time) ? draft.time : "09:00",
+        location: draft.location.trim(),
+      },
+    ];
+    setPersonalEvents(next);
+    p.onUi?.(personalCalendarEventsKey, JSON.stringify(next));
+    const [nextYear, nextMonth, nextDay] = draft.date.split("-").map(Number);
+    setYear(nextYear);
+    setMonth(nextMonth - 1);
+    setDay(nextDay);
+    setDraft({
+      title: "",
+      date: draft.date,
+      time: "09:00",
+      location: "",
+      body: "",
+    });
+    setAdding(false);
+  };
   const first = new Date(Date.UTC(year, month, 1)).getUTCDay(),
     days = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
   return (
     <div className="catalog-skin native-calendar">
-      <Header p={p} />
+      <header className="ios-calendar-nav">
+        <button aria-label="返回" onClick={p.onBack}>
+          <ChevronLeft size={23} />
+        </button>
+        <strong>日历</strong>
+        <button
+          aria-label="新建日程"
+          onClick={p.creator ? p.onAdd : openManualAdd}
+        >
+          <Plus size={24} />
+        </button>
+      </header>
       <div className="catalog-scroll">
-        <div className="month-title">
+        <div className="ios-calendar-heading">
+          <div>
+            <span>{year} 年</span>
+            <h1>{month + 1} 月</h1>
+          </div>
+          <button onClick={goToToday}>今天</button>
+        </div>
+        <div className="ios-calendar-controls">
           <button aria-label="上个月" onClick={() => move(-1)}>
-            <ChevronLeft />
+            <ChevronLeft size={18} />
           </button>
-          <h2>
-            {year} 年 {month + 1} 月
-          </h2>
+          <strong>月视图</strong>
           <button aria-label="下个月" onClick={() => move(1)}>
-            <ChevronRight />
+            <ChevronRight size={18} />
           </button>
         </div>
         <div className="calendar-grid">
@@ -448,12 +605,17 @@ export function CalendarSkin(p: Props) {
           ))}
           {Array.from({ length: days }, (_, i) => (
             <button
-              className={day === i + 1 ? "selected" : ""}
+              className={[
+                day === i + 1 && "selected",
+                year === start.year && month === start.month && day !== i + 1 && start.day === i + 1 && "today",
+              ]
+                .filter(Boolean)
+                .join(" ")}
               key={i}
               onClick={() => setDay(i + 1)}
             >
               {i + 1}
-              {p.items.some((x) =>
+              {items.some((x) =>
                 x.time.startsWith(
                   `${prefix}-${String(i + 1).padStart(2, "0")}`,
                 ),
@@ -461,8 +623,17 @@ export function CalendarSkin(p: Props) {
             </button>
           ))}
         </div>
-        <h4 className="native-section">
-          {month + 1} 月 {day} 日
+        <h4 className="ios-calendar-agenda-title">
+          <span>
+            {month + 1} 月 {day} 日
+          </span>
+          <small>
+            {
+              ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"][
+                new Date(Date.UTC(year, month, day)).getUTCDay()
+              ]
+            }
+          </small>
         </h4>
         {list.map((i) => (
           <button
@@ -478,7 +649,80 @@ export function CalendarSkin(p: Props) {
           </button>
         ))}
         <Empty items={list} label="当天没有日程" />
-        <Add p={p} label="添加日程" />
+        {adding &&
+          <form
+            className="calendar-event-form ios-calendar-sheet"
+            onSubmit={(event) => {
+              event.preventDefault();
+              addPersonalEvent();
+            }}
+          >
+            <strong>添加个人日程</strong>
+            <label>
+              标题
+              <input
+                required
+                maxLength={100}
+                placeholder="例如：和朋友喝咖啡"
+                value={draft.title}
+                onChange={(event) =>
+                  setDraft({ ...draft, title: event.target.value })
+                }
+              />
+            </label>
+            <div className="calendar-form-datetime">
+              <label>
+                日期
+                <input
+                  required
+                  type="date"
+                  value={draft.date}
+                  onChange={(event) =>
+                    setDraft({ ...draft, date: event.target.value })
+                  }
+                />
+              </label>
+              <label>
+                时间
+                <input
+                  required
+                  type="time"
+                  value={draft.time}
+                  onChange={(event) =>
+                    setDraft({ ...draft, time: event.target.value })
+                  }
+                />
+              </label>
+            </div>
+            <label>
+              地点
+              <input
+                maxLength={200}
+                placeholder="可选"
+                value={draft.location}
+                onChange={(event) =>
+                  setDraft({ ...draft, location: event.target.value })
+                }
+              />
+            </label>
+            <label>
+              备注
+              <textarea
+                maxLength={1000}
+                placeholder="可选"
+                value={draft.body}
+                onChange={(event) =>
+                  setDraft({ ...draft, body: event.target.value })
+                }
+              />
+            </label>
+            <div className="calendar-form-actions">
+              <button type="button" onClick={() => setAdding(false)}>
+                取消
+              </button>
+              <button type="submit">保存日程</button>
+            </div>
+          </form>}
       </div>
     </div>
   );

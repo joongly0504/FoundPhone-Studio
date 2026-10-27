@@ -3,7 +3,7 @@
   "id": "only-you-can-see",
   "title": "仅你可见",
   "description": "完全虚构的互动手机故事：两位虚构演员在《入戏》拍摄相识、因工作同住后，于收工夜晚展开的一段微信剧情。本作品不基于、也不宣称任何现实私人关系或真实聊天记录。",
-  "revision": 1,
+  "revision": 3,
   "phone": {
     "owner": "刘天跃（奥利）",
     "date": "2026-10-27",
@@ -223,16 +223,7 @@
         "sender": "李淑元（元元大王）"
       }
     ],
-    "calendar": [
-      {
-        "id": "calendar-rain-scene",
-        "title": "《入戏》雨戏",
-        "body": "10 月 28 日 09:30 · A 棚\n对手戏：刘天跃（奥利）/ 李淑元。收工后留出回家晚餐时间。",
-        "kind": "event",
-        "time": "2026-10-28 09:30",
-        "sender": "《入戏》通告组"
-      }
-    ],
+    "calendar": [],
     "photos": [
       {
         "id": "photo-umbrella-list",

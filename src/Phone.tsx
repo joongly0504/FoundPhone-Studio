@@ -988,6 +988,7 @@ function AppContent({
             <Skin
               appId={app.id}
               owner={work.phone.owner}
+              virtualDate={state.date || work.phone.date}
               virtualTime={state.time}
               ui={state.ui?.[app.id]}
               onUi={creator ? undefined : onUi}

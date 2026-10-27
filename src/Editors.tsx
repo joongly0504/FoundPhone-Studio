@@ -1,7 +1,7 @@
 import { getFields } from "./fields";
 import { useState, lazy, Suspense } from "react";
-import { X, Trash2, ImagePlus, Check } from "lucide-react";
-import { type Item, type Work, itemSchema, safeMedia } from "./schema";
+import { X, Trash2, ImagePlus, Check, CalendarDays, Plus } from "lucide-react";
+import { type Item, type Work, itemSchema, safeMedia, uid } from "./schema";
 import { mediaData } from "./io";
 import { parseChat, parseCsv } from "./chat";
 import { getApp } from "./registry";
@@ -344,6 +344,202 @@ export function ItemEditor({
     </Modal>
   );
 }
+
+function newCalendarEvent(work: Work): Item {
+  return itemSchema.parse({
+    id: uid(),
+    title: "",
+    body: "",
+    time: `${work.phone.date || "2026-09-01"} 09:00`,
+    sender: work.phone.owner,
+    kind: "event",
+    meta: { location: "" },
+  });
+}
+
+export function CalendarEventManager({
+  work,
+  onChange,
+}: {
+  work: Work;
+  onChange: (events: Item[]) => void;
+}) {
+  const [draft, setDraft] = useState(() => newCalendarEvent(work));
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [error, setError] = useState("");
+  const events = [...(work.data.calendar ?? [])].sort((a, b) =>
+    a.time.localeCompare(b.time),
+  );
+  const [date = work.phone.date || "2026-09-01", time = "09:00"] =
+    draft.time.split(" ");
+  const setTime = (nextDate: string, nextTime: string) =>
+    setDraft((event) => ({ ...event, time: `${nextDate} ${nextTime}` }));
+  const startNew = () => {
+    setDraft(newCalendarEvent(work));
+    setEditingId(null);
+    setError("");
+  };
+  const save = () => {
+    const title = draft.title.trim();
+    if (!title) {
+      setError("请填写日程标题。");
+      return;
+    }
+    const parsed = itemSchema.safeParse({
+      ...draft,
+      title,
+      body: draft.body.trim(),
+      kind: "event",
+      sender: work.phone.owner,
+      meta: { ...draft.meta, location: draft.meta.location?.trim() || "" },
+    });
+    if (!parsed.success) {
+      setError(parsed.error.message);
+      return;
+    }
+    const next = events.some((event) => event.id === parsed.data.id)
+      ? events.map((event) => (event.id === parsed.data.id ? parsed.data : event))
+      : [...events, parsed.data];
+    onChange(next);
+    startNew();
+  };
+  const remove = () => {
+    if (!editingId || !confirm("删除这条日历事件？可使用撤销恢复。")) return;
+    onChange(events.filter((event) => event.id !== editingId));
+    startNew();
+  };
+  return (
+    <div className="library-page calendar-manager">
+      <div className="page-title">
+        <div>
+          <h1>日历事件管理</h1>
+          <p>在这里维护所有玩家可见的固定日程。</p>
+        </div>
+        <button className="primary" onClick={startNew}>
+          <Plus size={16} />
+          新建日程
+        </button>
+      </div>
+      <div className="calendar-manager-note">
+        <CalendarDays size={18} />
+        保存后会写入作品的日历故事数据；玩家在手机上自行添加的个人日程不会出现在这里。
+      </div>
+      <div className="calendar-manager-grid">
+        <section className="calendar-manager-list" aria-label="已保存的日历事件">
+          <header>
+            <strong>已保存日程</strong>
+            <small>{events.length} 条</small>
+          </header>
+          {events.length ? (
+            events.map((event) => (
+              <button
+                className={editingId === event.id ? "selected" : ""}
+                key={event.id}
+                onClick={() => {
+                  setDraft(event);
+                  setEditingId(event.id);
+                  setError("");
+                }}
+              >
+                <time>{event.time.replace(" ", " · ")}</time>
+                <strong>{event.title}</strong>
+                <span>{event.meta.location || "未填写地点"}</span>
+              </button>
+            ))
+          ) : (
+            <p>还没有固定日程。使用右侧表单新建一条。</p>
+          )}
+        </section>
+        <form
+          className="calendar-manager-form"
+          onSubmit={(event) => {
+            event.preventDefault();
+            save();
+          }}
+        >
+          <div>
+            <h2>{editingId ? "编辑日程" : "新建日程"}</h2>
+            {editingId && <small>固定故事数据</small>}
+          </div>
+          <label>
+            标题
+            <input
+              required
+              maxLength={100}
+              placeholder="例如：剧本围读"
+              value={draft.title}
+              onChange={(event) =>
+                setDraft((item) => ({ ...item, title: event.target.value }))
+              }
+            />
+          </label>
+          <div className="two-cols">
+            <label>
+              日期
+              <input
+                required
+                type="date"
+                value={date}
+                onChange={(event) => setTime(event.target.value, time)}
+              />
+            </label>
+            <label>
+              时间
+              <input
+                required
+                type="time"
+                value={time}
+                onChange={(event) => setTime(date, event.target.value)}
+              />
+            </label>
+          </div>
+          <label>
+            地点
+            <input
+              maxLength={200}
+              placeholder="可选；请使用虚构或公开场景"
+              value={draft.meta.location || ""}
+              onChange={(event) =>
+                setDraft((item) => ({
+                  ...item,
+                  meta: { ...item.meta, location: event.target.value },
+                }))
+              }
+            />
+          </label>
+          <label>
+            备注
+            <textarea
+              rows={5}
+              maxLength={1000}
+              placeholder="可选"
+              value={draft.body}
+              onChange={(event) =>
+                setDraft((item) => ({ ...item, body: event.target.value }))
+              }
+            />
+          </label>
+          {error && <p className="error">{error}</p>}
+          <footer>
+            {editingId ? (
+              <button className="danger ghost" type="button" onClick={remove}>
+                <Trash2 size={15} />
+                删除
+              </button>
+            ) : (
+              <span />
+            )}
+            <button className="primary" type="submit">
+              <Check size={16} />
+              保存到故事数据
+            </button>
+          </footer>
+        </form>
+      </div>
+    </div>
+  );
+}
+
 export function PhoneSettings({
   work,
   onChange,
