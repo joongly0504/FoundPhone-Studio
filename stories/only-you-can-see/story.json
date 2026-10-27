@@ -3,7 +3,7 @@
   "id": "only-you-can-see",
   "title": "仅你可见",
   "description": "完全虚构的互动手机故事：两位虚构演员在《入戏》拍摄相识、因工作同住后，于收工夜晚展开的一段微信剧情。本作品不基于、也不宣称任何现实私人关系或真实聊天记录。",
-  "revision": 1,
+  "revision": 2,
   "phone": {
     "owner": "刘天跃（奥利）",
     "date": "2026-10-27",
@@ -225,12 +225,268 @@
     ],
     "calendar": [
       {
+        "id": "calendar-table-read",
+        "title": "《入戏》剧本围读",
+        "body": "主创第一次完整围读。奥利和元元大王在这部完全虚构的作品中相识；会后由导演统一收集人物小传修改意见。",
+        "kind": "event",
+        "time": "2026-10-20 10:00",
+        "sender": "《入戏》通告组",
+        "meta": {
+          "location": "云栖影视城·读本室",
+          "duration": "2 小时"
+        }
+      },
+      {
+        "id": "calendar-look-test",
+        "title": "《入戏》定妆与人物海报拍摄",
+        "body": "双人定妆与单人海报依次进行；服装组备两套雨景戏替换服装。",
+        "kind": "event",
+        "time": "2026-10-22 08:30",
+        "sender": "《入戏》通告组",
+        "meta": {
+          "location": "云栖影视城·摄影棚 C",
+          "duration": "全天"
+        }
+      },
+      {
+        "id": "calendar-oli-commercial",
+        "title": "奥利 · 品牌短片拍摄",
+        "body": "奥利个人工作。午后结束后回剧组参加次日走位会；通告单已发给经纪团队。",
+        "kind": "event",
+        "time": "2026-10-24 09:00",
+        "sender": "奥利工作室（虚构）",
+        "meta": {
+          "location": "栖光影棚 2 号厅",
+          "duration": "4 小时"
+        }
+      },
+      {
+        "id": "calendar-yuanyuan-rehearsal",
+        "title": "元元大王 · 台词排练",
+        "body": "元元大王个人排练；带标注剧本，确认下一周的重场戏节奏。",
+        "kind": "event",
+        "time": "2026-10-24 14:00",
+        "sender": "《入戏》通告组",
+        "meta": {
+          "location": "云栖影视城·排练室 3",
+          "duration": "2 小时"
+        }
+      },
+      {
+        "id": "calendar-home-supplies",
+        "title": "共同休息日 · 家居补给",
+        "body": "完全虚构的同居日常：补洗衣液、咖啡豆和一只新的玻璃花瓶；不记录住址。",
+        "kind": "event",
+        "time": "2026-10-25 10:30",
+        "sender": "刘天跃（奥利）",
+        "meta": {
+          "location": "青栎生活市集",
+          "duration": "2 小时"
+        }
+      },
+      {
+        "id": "calendar-anniversary-reservation",
+        "title": "预约：同住纪念日晚餐",
+        "body": "奥利订了靠窗位。备注：不加香菜；甜点要一份小的，结束时间不晚于次日早班。",
+        "kind": "event",
+        "time": "2026-10-25 19:00",
+        "sender": "刘天跃（奥利）",
+        "meta": {
+          "location": "镜湖餐厅",
+          "duration": "1.5 小时"
+        }
+      },
+      {
+        "id": "calendar-blocking-review",
+        "title": "《入戏》走位与机位复盘",
+        "body": "确认雨戏走位、备用机位和收音方案。两位主演结束后各自整理次日台词。",
+        "kind": "event",
+        "time": "2026-10-26 15:30",
+        "sender": "《入戏》通告组",
+        "meta": {
+          "location": "云栖影视城·A 棚",
+          "duration": "1.5 小时"
+        }
+      },
+      {
+        "id": "calendar-call-1027",
+        "title": "《入戏》妆发与走位确认",
+        "body": "今日通告：先完成日景对手戏，下午转入情绪戏；奥利的保温杯与围巾已列入随身清单。",
+        "kind": "event",
+        "time": "2026-10-27 07:30",
+        "sender": "《入戏》通告组",
+        "meta": {
+          "location": "云栖影视城·A 棚",
+          "duration": "1 小时"
+        }
+      },
+      {
+        "id": "calendar-day-scene-1027",
+        "title": "《入戏》日景对手戏",
+        "body": "刘天跃（奥利）与李淑元（元元大王）的日景对手戏。中午前完成主机位，午休后继续细调情绪段落。",
+        "kind": "event",
+        "time": "2026-10-27 10:00",
+        "sender": "《入戏》通告组",
+        "meta": {
+          "location": "云栖影视城·A 棚",
+          "duration": "3 小时"
+        }
+      },
+      {
+        "id": "calendar-emotion-scene-1027",
+        "title": "《入戏》情绪戏",
+        "body": "下午重场。导演预留安静复盘时间；休息区备不加冰的气泡水。",
+        "kind": "event",
+        "time": "2026-10-27 13:20",
+        "sender": "《入戏》通告组",
+        "meta": {
+          "location": "云栖影视城·A 棚",
+          "duration": "3 小时"
+        }
+      },
+      {
+        "id": "calendar-night-scene-1027",
+        "title": "《入戏》夜戏",
+        "body": "雨景补拍前的夜戏。服装车保留奥利的围巾；预计 21:00 后收工，视天气与现场进度调整。",
+        "kind": "event",
+        "time": "2026-10-27 18:00",
+        "sender": "《入戏》通告组",
+        "meta": {
+          "location": "云栖影视城·A 棚",
+          "duration": "3 小时"
+        }
+      },
+      {
+        "id": "calendar-b-exit-1027",
+        "title": "收工后：B 口会合",
+        "body": "雨天优先走停车场 B 口。车内备干毛巾和热饮；这是作品中的固定虚构记录。",
+        "kind": "event",
+        "time": "2026-10-27 21:25",
+        "sender": "李淑元（元元大王）",
+        "meta": {
+          "location": "云栖影视城·停车场 B 口",
+          "duration": "30 分钟"
+        }
+      },
+      {
         "id": "calendar-rain-scene",
         "title": "《入戏》雨戏",
-        "body": "10 月 28 日 09:30 · A 棚\n对手戏：刘天跃（奥利）/ 李淑元。收工后留出回家晚餐时间。",
+        "body": "对手戏：刘天跃（奥利）/ 李淑元。依据通告群更新，第一场改为 09:30；收工后留出晚餐时间。",
         "kind": "event",
         "time": "2026-10-28 09:30",
-        "sender": "《入戏》通告组"
+        "sender": "《入戏》通告组",
+        "meta": {
+          "location": "云栖影视城·A 棚",
+          "duration": "4 小时"
+        }
+      },
+      {
+        "id": "calendar-oli-interview",
+        "title": "奥利 · 角色采访录制",
+        "body": "奥利个人工作。采访只谈完全虚构的角色创作与剧组体验，不涉及任何现实私人信息。",
+        "kind": "event",
+        "time": "2026-10-29 10:00",
+        "sender": "《入戏》宣传组",
+        "meta": {
+          "location": "云台演播间",
+          "duration": "1.5 小时"
+        }
+      },
+      {
+        "id": "calendar-yuanyuan-editorial",
+        "title": "元元大王 · 杂志造型拍摄",
+        "body": "元元大王个人工作。妆发完成后直接回剧组，助理带备用衬衫。",
+        "kind": "event",
+        "time": "2026-10-29 16:30",
+        "sender": "元元大王工作室（虚构）",
+        "meta": {
+          "location": "栖光影棚 1 号厅",
+          "duration": "3 小时"
+        }
+      },
+      {
+        "id": "calendar-location-day",
+        "title": "《入戏》外景日",
+        "body": "晨景与街角镜头。天气转凉，剧组统一发放暖贴；午后转拍单人镜头。",
+        "kind": "event",
+        "time": "2026-10-30 08:30",
+        "sender": "《入戏》通告组",
+        "meta": {
+          "location": "雾川影视外景地",
+          "duration": "全天"
+        }
+      },
+      {
+        "id": "calendar-laundry-day",
+        "title": "共同休息日 · 整理与洗衣",
+        "body": "完全虚构的同居日常：整理戏服送洗单、换床品、把下周通告贴到冰箱门上；不含任何真实住址。",
+        "kind": "event",
+        "time": "2026-10-31 10:30",
+        "sender": "刘天跃（奥利）",
+        "meta": {
+          "location": "居所（仅虚构，无地址）",
+          "duration": "2 小时"
+        }
+      },
+      {
+        "id": "calendar-anniversary-dinner",
+        "title": "同住纪念日晚餐",
+        "body": "提前十分钟到店。奥利负责确认甜点，元元大王负责挑一支适合带回家的小花。",
+        "kind": "event",
+        "time": "2026-11-02 19:00",
+        "sender": "刘天跃（奥利）",
+        "meta": {
+          "location": "镜湖餐厅·靠窗位",
+          "duration": "1.5 小时"
+        }
+      },
+      {
+        "id": "calendar-oli-dubbing",
+        "title": "奥利 · 后期配音",
+        "body": "奥利个人工作。带雨戏当天的台词标注，结束后与录音师确认补录段落。",
+        "kind": "event",
+        "time": "2026-11-03 11:00",
+        "sender": "《入戏》后期组",
+        "meta": {
+          "location": "云声录音棚",
+          "duration": "2 小时"
+        }
+      },
+      {
+        "id": "calendar-yuanyuan-fitting",
+        "title": "元元大王 · 服装试装",
+        "body": "元元大王个人工作。确认后半程造型与鞋码，晚间把拍立得收进道具箱。",
+        "kind": "event",
+        "time": "2026-11-03 15:00",
+        "sender": "《入戏》服装组",
+        "meta": {
+          "location": "云栖影视城·服装间",
+          "duration": "1.5 小时"
+        }
+      },
+      {
+        "id": "calendar-creative-meeting",
+        "title": "《入戏》主创小会",
+        "body": "讨论后半程拍摄顺序与雨备方案。两位主演会后各自确认下周个人工作。",
+        "kind": "event",
+        "time": "2026-11-06 16:00",
+        "sender": "《入戏》制片组",
+        "meta": {
+          "location": "云栖影视城·会议室 2",
+          "duration": "1 小时"
+        }
+      },
+      {
+        "id": "calendar-gallery-date",
+        "title": "共同休息 · 看展",
+        "body": "完全虚构的约会安排：先看摄影展，再去附近喝热饮；如临时加戏则顺延。",
+        "kind": "event",
+        "time": "2026-11-07 14:00",
+        "sender": "李淑元（元元大王）",
+        "meta": {
+          "location": "北岸艺术馆",
+          "duration": "2.5 小时"
+        }
       }
     ],
     "photos": [
