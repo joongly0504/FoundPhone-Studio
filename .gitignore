@@ -1,6 +1,7 @@
 node_modules/
 dist/
 dist-player/
+dist-studio/
 work/
 outputs/
 *.tsbuildinfo
