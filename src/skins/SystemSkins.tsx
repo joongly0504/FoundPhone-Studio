@@ -519,6 +519,21 @@ export function CalendarSkin(p: Props) {
     setMonth(date.getUTCMonth());
     setDay(1);
   };
+  const openManualAdd = () => {
+    setDraft({
+      title: "",
+      date: `${prefix}-${String(day).padStart(2, "0")}`,
+      time: "09:00",
+      location: "",
+      body: "",
+    });
+    setAdding(true);
+  };
+  const goToToday = () => {
+    setYear(start.year);
+    setMonth(start.month);
+    setDay(start.day);
+  };
   const addPersonalEvent = () => {
     const title = draft.title.trim();
     if (!title || !/^\d{4}-\d{2}-\d{2}$/.test(draft.date)) return;
@@ -552,17 +567,33 @@ export function CalendarSkin(p: Props) {
     days = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
   return (
     <div className="catalog-skin native-calendar">
-      <Header p={p} />
+      <header className="ios-calendar-nav">
+        <button aria-label="返回" onClick={p.onBack}>
+          <ChevronLeft size={23} />
+        </button>
+        <strong>日历</strong>
+        <button
+          aria-label="新建日程"
+          onClick={p.creator ? p.onAdd : openManualAdd}
+        >
+          <Plus size={24} />
+        </button>
+      </header>
       <div className="catalog-scroll">
-        <div className="month-title">
+        <div className="ios-calendar-heading">
+          <div>
+            <span>{year} 年</span>
+            <h1>{month + 1} 月</h1>
+          </div>
+          <button onClick={goToToday}>今天</button>
+        </div>
+        <div className="ios-calendar-controls">
           <button aria-label="上个月" onClick={() => move(-1)}>
-            <ChevronLeft />
+            <ChevronLeft size={18} />
           </button>
-          <h2>
-            {year} 年 {month + 1} 月
-          </h2>
+          <strong>月视图</strong>
           <button aria-label="下个月" onClick={() => move(1)}>
-            <ChevronRight />
+            <ChevronRight size={18} />
           </button>
         </div>
         <div className="calendar-grid">
@@ -574,7 +605,12 @@ export function CalendarSkin(p: Props) {
           ))}
           {Array.from({ length: days }, (_, i) => (
             <button
-              className={day === i + 1 ? "selected" : ""}
+              className={[
+                day === i + 1 && "selected",
+                year === start.year && month === start.month && day !== i + 1 && start.day === i + 1 && "today",
+              ]
+                .filter(Boolean)
+                .join(" ")}
               key={i}
               onClick={() => setDay(i + 1)}
             >
@@ -587,8 +623,17 @@ export function CalendarSkin(p: Props) {
             </button>
           ))}
         </div>
-        <h4 className="native-section">
-          {month + 1} 月 {day} 日
+        <h4 className="ios-calendar-agenda-title">
+          <span>
+            {month + 1} 月 {day} 日
+          </span>
+          <small>
+            {
+              ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"][
+                new Date(Date.UTC(year, month, day)).getUTCDay()
+              ]
+            }
+          </small>
         </h4>
         {list.map((i) => (
           <button
@@ -604,11 +649,9 @@ export function CalendarSkin(p: Props) {
           </button>
         ))}
         <Empty items={list} label="当天没有日程" />
-        {p.creator ? (
-          <Add p={p} label="添加日程" />
-        ) : adding ? (
+        {adding &&
           <form
-            className="calendar-event-form"
+            className="calendar-event-form ios-calendar-sheet"
             onSubmit={(event) => {
               event.preventDefault();
               addPersonalEvent();
@@ -679,25 +722,7 @@ export function CalendarSkin(p: Props) {
               </button>
               <button type="submit">保存日程</button>
             </div>
-          </form>
-        ) : (
-          <button
-            className="catalog-add"
-            onClick={() => {
-              setDraft({
-                title: "",
-                date: `${prefix}-${String(day).padStart(2, "0")}`,
-                time: "09:00",
-                location: "",
-                body: "",
-              });
-              setAdding(true);
-            }}
-          >
-            <Plus size={15} />
-            添加个人日程
-          </button>
-        )}
+          </form>}
       </div>
     </div>
   );
